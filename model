@@ -1,0 +1,12 @@
+class RequestChanges:
+    def __init__(self, host, average_start_datetime, average_end_datetime, change_percent, change_type,
+                 chunk_interval, start_datetime, end_datetime, time_zone):
+        self.host = host
+        self.average_start_datetime = average_start_datetime
+        self.average_end_datetime = average_end_datetime
+        self.change_percent = change_percent
+        self.change_type = change_type
+        self.chunk_interval = chunk_interval
+        self.start_datetime = start_datetime
+        self.end_datetime = end_datetime
+        self.time_zone = time_zone
