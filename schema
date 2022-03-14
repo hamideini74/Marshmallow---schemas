@@ -1,0 +1,22 @@
+from marshmallow import Schema, fields, post_load, validate, RAISE
+
+
+class RequestChangesSchema(Schema):
+    class Meta:
+        unknown = RAISE
+
+       
+
+    host = fields.String(required=True, error_messages={"required": "host is required"})
+    average_start_datetime = fields.DateTime(required=True, format='%m/%d/%Y - %H:%M:%S')
+    average_end_datetime = fields.DateTime(required=True, format='%m/%d/%Y - %H:%M:%S')
+    change_percent = fields.Integer(required=True, validate=validate.Range(min=1, max=100))
+    change_type = fields.String(required=True, validate=validate.OneOf(["increase", "decrease"]))
+    chunk_interval = fields.String(required=True, validate=validate.Length(min=2, error="Invalid chunk interval"))
+    start_datetime = fields.DateTime(required=True, format='%m/%d/%Y - %H:%M:%S')
+    end_datetime = fields.DateTime(required=True, format='%m/%d/%Y - %H:%M:%S')
+    time_zone = fields.String(required=True, validate=validate.OneOf(["utc", "tehran"]))
+
+    @post_load()
+    def make_request_changes(self, data, **kwargs):
+        return RequestChanges(**data)
