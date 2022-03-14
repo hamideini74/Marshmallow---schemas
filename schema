@@ -1,5 +1,5 @@
 from marshmallow import Schema, fields, post_load, validate, RAISE
-
+from models import RequestChanges
 
 class RequestChangesSchema(Schema):
     class Meta:
